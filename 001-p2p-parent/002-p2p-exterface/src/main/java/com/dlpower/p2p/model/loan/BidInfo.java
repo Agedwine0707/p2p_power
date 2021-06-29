@@ -1,5 +1,6 @@
 package com.dlpower.p2p.model.loan;
 
+import com.dlpower.p2p.model.user.User;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -40,6 +41,11 @@ public class BidInfo implements Serializable {
      * 投标状态
      */
     private Integer bidStatus;
+
+    /**
+     * 投标用户
+     */
+    private User user;
 
     private static final long serialVersionUID = 1L;
 }

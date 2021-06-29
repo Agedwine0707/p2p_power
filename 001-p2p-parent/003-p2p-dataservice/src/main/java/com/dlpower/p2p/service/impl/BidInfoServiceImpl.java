@@ -3,12 +3,15 @@ package com.dlpower.p2p.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.dlpower.p2p.cons.Constants;
 import com.dlpower.p2p.mapper.loan.BidInfoMapper;
+import com.dlpower.p2p.model.loan.BidInfo;
 import com.dlpower.p2p.service.BidInfoService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -48,5 +51,16 @@ public class BidInfoServiceImpl implements BidInfoService {
         }
 
         return investMoney;
+    }
+
+    /**
+     * 查询对应id产品的最近10条记录
+     * @param paramMap
+     * @return
+     */
+    @Override
+    public List<BidInfo> queryRecentlyBidInfoByLoanId(Map<String, Object> paramMap) {
+        return bidInfoMapper.selectRecentlyBidInfoByLoanId(paramMap);
+
     }
 }

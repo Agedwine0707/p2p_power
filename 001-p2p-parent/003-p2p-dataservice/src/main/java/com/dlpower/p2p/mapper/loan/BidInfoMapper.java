@@ -3,6 +3,9 @@ package com.dlpower.p2p.mapper.loan;
 
 import com.dlpower.p2p.model.loan.BidInfo;
 
+import java.util.List;
+import java.util.Map;
+
 public interface BidInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,4 +21,6 @@ public interface BidInfoMapper {
 
 
     Double selectSumBidMoney();
+
+    List<BidInfo> selectRecentlyBidInfoByLoanId(Map<String, Object> paramMap);
 }

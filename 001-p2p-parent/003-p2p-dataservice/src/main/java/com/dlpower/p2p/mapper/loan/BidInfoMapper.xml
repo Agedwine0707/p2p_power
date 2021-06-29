@@ -9,6 +9,7 @@
         <result column="bid_money" jdbcType="DOUBLE" property="bidMoney"/>
         <result column="bid_time" jdbcType="TIMESTAMP" property="bidTime"/>
         <result column="bid_status" jdbcType="INTEGER" property="bidStatus"/>
+        <association property="user" javaType="com.dlpower.p2p.model.user.User" autoMapping="true"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -25,6 +26,24 @@
     <select id="selectSumBidMoney" resultType="java.lang.Double">
         select sum(bid_money)
         from b_bid_info
+    </select>
+    <!--根据LoanId查询最近的10条投资记录-->
+    <select id="selectRecentlyBidInfoByLoanId" resultMap="BaseResultMap">
+        SELECT
+        b.*,u.*
+        FROM
+        b_bid_info b
+        LEFT JOIN u_user u
+        ON
+        b.uid = u.id
+        WHERE b.loan_id = #{loanId}
+
+        ORDER BY
+        b.bid_time
+        DESC
+
+        LIMIT  #{currentPage},#{pageSize};
+
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
